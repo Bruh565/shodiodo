@@ -23,7 +23,7 @@ def limit_request(request_to_make, limit=3, per=1, request_name='test', **kwargs
 
     request_possibility = int(r_db.over_limit_lua(keys=request_name, args=[limit, per]))
     if request_possibility > 0:
-        time.sleep(request_possibility / 1000.0)
+        time.sleep(request_possibility / 10000.0)
         return limit_request(request_to_make, limit, per, request_name, **kwargs)
     else:
         request_result = request_to_make(**kwargs)
